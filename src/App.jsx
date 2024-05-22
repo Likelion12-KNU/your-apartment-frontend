@@ -1,34 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import PostForm from './PostForm'
+import Post from './Post'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+  <>
+  <div id='top'>
+      <div id='sortBy_div'>
+        <p id='sortBy_ranking'>랭킹순</p>
+        <p id='sortBy_latest'>최신순</p>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
+    <PostForm/>
+    <Post/>            
+    {/* 나중에 Post에 map()을 사용해서 등록을 한 만큼 게시물이 보이도록 할 예정 */}
+  </>
+    
   )
 }
 
