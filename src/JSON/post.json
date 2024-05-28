@@ -1,0 +1,32 @@
+[
+    {
+        "nickname":"아기사자1",
+        "aptname":"우성아파트",
+        "heart":0,
+        "comment":[]
+    },
+    {
+        "nickname":"아기사자2",
+        "aptname":"빌라빌라",
+        "heart":0,
+        "comment":[]
+    },
+    {
+        "nickname":"아기사자3",
+        "aptname":"아파트아파트",
+        "heart":0,
+        "comment":[]
+    },
+    {
+        "nickname":"아기사자4",
+        "aptname":"재연아파트",
+        "heart":0,
+        "comment":[]
+    },
+    {
+        "nickname":"아기사자5",
+        "aptname":"힐스테이트",
+        "heart":0,
+        "comment":[]
+    }
+]
