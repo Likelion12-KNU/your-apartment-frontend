@@ -2,7 +2,7 @@
   width: 100%;
   height: 70px;
   background-color: black;
-  border-bottom: 0.5px solid white;
+  border: 0.5px solid white;
   display: flex;
   justify-content: center;
 }
@@ -19,4 +19,20 @@
   font-size: 30px;
   color: white;
   
+}
+#mid{
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  border-bottom: 0.5px solid white;
+  border-left: 0.5px solid white;
+  border-right: 0.5px solid white;
+}
+#mid::-webkit-scrollbar{
+  width: 10px;
+  background-color: black;
+}
+#mid::-webkit-scrollbar-thumb{
+  background-color: white;
+  border-radius: 20px;
 }
