@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import Post from './Post';
+import postData from './JSON/post.json';
 
 import Post from './Post'
 import PostForm from './PostForm';
@@ -9,7 +12,7 @@ import './PostList.css';
 
 // 게시글 등록 함수
 function PostList() {
-  const [posts, setPosts] = useState([]); //게시글 리스트 상태 - 초기값을 빈 배열로 
+  const [postList, setPostList] = useState(postData); 
 
   /**
    * 등록 폼 설정 함수 아파트 이름, 비번을 받으면,
@@ -35,28 +38,21 @@ function PostList() {
     // 새로운 게시글을 이전의 게시글 리스트 앞에 추가하는 상태 업데이트 함수이다. 
   };
 
-
   // 게시물들을 렌더링 하는 하는 부분이다. 
   return (
     <div id='PostList_div'>
-      <div className="fixed-form-container">
-        <PostForm registerPost={registerPost} />
-        {/* // PostForm 컴포넌트에 registerPost 함수 전달 */}
-      </div>
-      <div className="posts-container">
-        {posts.map((post) =>
-          <Post
-            key={post.id}  // React에서 리스트 항목을 고유하게 식별하기 위해 사용 --> 게시글의 댓글, 공감이 독립적으로 관리되도록한다.
-            id={post.id} // 컴포넌트에 post의 ID 값을 전달하여 게시물을 식별하고 관련 데이터를 처리
-            nickname={post.nickname} //닉네임을 전달
-            aptname={post.aptname} //이피트 이름을 전달
-            heart={post.heart} //공감 수를 전달
-            comment={post.comment} // 초기 댓글 리스트 전달
-          />
-        )}
-      </div>
+      {postList.data.map((v, i) => (
+        <Post
+          key={v._id}  // 고유한 키 prop으로 v.id 사용
+          id={v._id}  // 각 게시물에 고유한 ID 전달
+          nickname={v.nickname}
+          aptname={v.apartmentName.apartmentName}
+          heart={v.likeCount}
+          comment={v.commentCount}
+        />
+      ))}
     </div>
   );
 }
 
-export default PostList
+export default PostList;
