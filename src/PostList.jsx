@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import Post from './Post';
 import postData from './JSON/post.json';
-
-import Post from './Post'
 import PostForm from './PostForm';
-import { useState } from 'react';
 import './PostList.css';
 /**
  * 게시글 등록 폼, 게시글들을 관리합니다. 
@@ -12,7 +9,7 @@ import './PostList.css';
 
 // 게시글 등록 함수
 function PostList() {
-  const [postList, setPostList] = useState(postData); 
+  const [postList, setPostList] = useState(postData);
 
   /**
    * 등록 폼 설정 함수 아파트 이름, 비번을 받으면,
@@ -34,7 +31,7 @@ function PostList() {
       heart: 0, // 새로운 게시글의 초기 좋아요 개수는 0으로 설정
       comment: [], // 새로운 게시글의 초기 댓글 리스트는 빈 배열로 설정
     };
-    setPosts([newPost, ...posts]); 
+    setPosts([newPost, ...posts]);
     // 새로운 게시글을 이전의 게시글 리스트 앞에 추가하는 상태 업데이트 함수이다. 
   };
 
