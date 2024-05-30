@@ -36,6 +36,7 @@ jobs:
         username: team1
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
-          pm2 stop 1
-          pm2 del 1
+          pm2 stop all
+          pm2 del all
+          pm2 start "java -jar build/libs/yourapartment.jar"
           pm2 start "serve dist"
