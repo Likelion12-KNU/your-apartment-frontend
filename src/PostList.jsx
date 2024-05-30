@@ -38,6 +38,10 @@ function PostList() {
   // 게시물들을 렌더링 하는 하는 부분이다. 
   return (
     <div id='PostList_div'>
+      <div className="fixed-form-container">
+        <PostForm registerPost={registerPost} />
+        {/* // PostForm 컴포넌트에 registerPost 함수 전달 */}
+      </div>
       {postList.data.map((v, i) => (
         <Post
           key={v._id}  // 고유한 키 prop으로 v.id 사용
