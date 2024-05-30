@@ -84,7 +84,7 @@
     width: 5px;
     background-color: black;
   }
-#comment_list::-webkit-scrollbar-thumb{
+ #comment_list::-webkit-scrollbar-thumb{
     background-color: white;
     border-radius: 20px;
   }
