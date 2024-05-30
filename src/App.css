@@ -16,9 +16,14 @@
   justify-content: space-evenly;
 }
 #sortBy_div p{
-  font-size: 30px;
+  cursor: pointer;
+  font-size: 25px;
   color: white;
   
+}
+
+#sortBy_div p:hover{
+  color: rgb(109, 175, 255);
 }
 #mid{
   width: 100%;
