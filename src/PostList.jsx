@@ -41,25 +41,25 @@ function PostList({sortURL}) {    //API URL을 app.jsx로부터 받아옴
 
 
   useEffect(() => {                     //api에서 가져온 게시물 리스트들이 변할 때마다 리렌더링!
-    const fetchData = async () => {
-      try {
-        const config = {
-          method: 'get',
-          maxBodyLength: Infinity,
-          url: `${sortURL}`,            //최신순을 클릭했는지, 랭킹순을 클릭했는지에 따라서 API url 주소가 바뀝니다!
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
-        const response = await axios.request(config);
-        setPosts(response.data.data); // posts를 api에서 가져온 데이터로 설정
-      } catch (error) {
-        console.error(error);
+      const fetchData = async () => {
+        try {
+          const config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `${sortURL}`,            //최신순을 클릭했는지, 랭킹순을 클릭했는지에 따라서 API url 주소가 바뀝니다!
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          };
+          const response = await axios.request(config);
+          setPosts(response.data.data); // posts를 api에서 가져온 데이터로 설정
+        } catch (error) {
+          console.error(error);
+        }
       }
 
-
-    fetchData();
-  }, [posts]);    //posts를 관찰!
+      fetchData();
+    }, [posts]);    //posts를 관찰!
 
 
   // 게시물들을 렌더링 하는 하는 부분이다. 
