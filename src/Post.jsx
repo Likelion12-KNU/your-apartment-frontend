@@ -1,16 +1,27 @@
-import React, { useState, useRef, useEffect } from "react";
-import "./Post.css";
-import chatIcon from "./assets/chat.svg";
-import heartIcon from "./assets/heart.svg";
-import fillHeartIcon from "./assets/fillHeart.svg";
 
-function Post({ id, nickname, aptname, heart, comment }) {
-  const [isHeartClicked, setIsHeartClicked] = useState(false);
-  const [heartNum, setHeartNum] = useState(heart);  // 초기 값을 heart prop으로 설정
-  const [commentSelected, setCommentSelected] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const inputCommentRef = useRef(null);
-  const [commentText, setCommentText] = useState(comment || []);
+import React, { useState, useRef,useEffect } from "react";
+import "./Post.css";
+import chatIcon from "./assets/chat.svg"; // chat.svg 파일을 import
+import heartIcon from "./assets/heart.svg"; // heart.svg 파일을 import
+import fillHeartIcon from "./assets/fillHeart.svg"; // fillHeart.svg 파일을 import
+import axios from "axios";
+// import postData from "./JSON/post.json";
+
+/**
+ * 좋아요 수 댓글 수를 관리합니다.
+ */
+
+function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentCount }) {   //postList 컴포넌트에서 json props를 받아온다.
+  // isHeartClicked 상태 변수와 setIsHeartClicked 함수: 하트 아이콘 클릭 여부를 관리
+  const [isHeartClicked, setIsHeartClicked] = useState(isLiked);
+  // heart 상태 변수와 setHeart 함수: 하트 숫자를 관리
+  const [heartNum, setHeartNum] = useState(likeCount);     //좋아요 수 개수
+//처음 렌더링될 때 해당 게시글의 현재 좋아요 개수를 보여주기 위해 0에서 heart로 변경
+  const [commentSelected, setCommentSelected] = useState(false);    //댓글 이모티콘이 선택 됐는지 아닌지
+  const [inputValue, setInputValue] = useState(""); 
+  const inputCommentRef = useRef(null); 
+  const [commentText, setCommentText] = useState([]); 
+
 
   useEffect(() => {
     fetch(`https://apt-api.blbt.app/v1/apartment/${id}/like`)
@@ -19,7 +30,9 @@ function Post({ id, nickname, aptname, heart, comment }) {
 
         setHeartNum(data.likes);
 
-        fetch(`https://apt-api.blbt.app/v1/apartment?page=0&size=1000&order=newest`)
+
+        fetch( `${sortURL}`)
+
           .then((response) => response.json())
           .then((data) => {
             setIsHeartClicked(data.data.find((v) => v._id === id).isLiked);
@@ -56,9 +69,11 @@ function Post({ id, nickname, aptname, heart, comment }) {
         setHeartNum(heartNum - 1);
         setIsHeartClicked(false);
 
+
       })
 
   };
+
 
   const toggleHeart = () => {
     if (isHeartClicked) {
@@ -104,30 +119,23 @@ function Post({ id, nickname, aptname, heart, comment }) {
             alt="Comment Icon"
             className="icon"
           />
-          <p id="countComment">{commentText.length}</p>
+
+          {/* 현재 댓글 숫자를 표시 */}
+          <p id='countComment'>{commentCount}</p>
         </div>
-        {commentSelected && (
-          <>
-            <div id="input_comment_div">
-              <input
-                ref={inputCommentRef}
-                value={inputValue}
-                onChange={onChangeInput}
-                type="text"
-                placeholder="댓글을 입력하세요."
-                id="input_comment"
-              />
-              <button onClick={onClickCommentAdd}>댓글 추가</button>
+        {commentSelected &&
+          <div id="comment_div">
+            <div id='input_comment_div'>
+              <input ref={inputCommentRef} value={inputValue} onChange={onChangeInput} type='text' placeholder='댓글을 입력하세요.' id='input_comment'/>
+              <button onClick={onClickCommentAdd} >댓글 추가</button>
             </div>
-            <div id="comment_list">
-              {commentText.map((v, i) => (
-                <p key={i}>
-                  <b>익명{i + 1} </b>{v}
-                </p>
-              ))}
+            <div id='comment_list'>
+              {/* {comment.map((comment, i) => <p key={i} ><b>익명{i + 1} </b>{comment}</p>)} */}
             </div>
-          </>
-        )}
+          </div>
+
+        }
+
       </div>
     </div>
   );
