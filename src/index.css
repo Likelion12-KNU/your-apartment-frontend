@@ -1,15 +1,12 @@
 body{
 display: flex;
+height: 100vh;
 justify-content: center;
  background-color: black;
 }
 body::-webkit-scrollbar{
-  width: 10px;
+  width: 0px;
   background-color: black;
-}
-body::-webkit-scrollbar-thumb{
-  background-color: white;
-  border-radius: 20px;
 }
 
 #page_title{
@@ -22,8 +19,9 @@ body::-webkit-scrollbar-thumb{
   color: #B6B6B6;
 }
 #root{
+  
   width: 50%;
-  height: 100vh;
+  height: 100%;
   background-color: black;
   
 

@@ -63,15 +63,16 @@ function PostList({sortURL}) {    //API URL을 app.jsx로부터 받아옴
   // 게시물들을 렌더링 하는 하는 부분이다. 
   return (
     <div id='PostList_div'>
-      <div className="fixed-form-container">
+      <div id="fixed-form-container">
         <PostForm  />
         {/* // PostForm 컴포넌트에 registerPost 함수 전달 */}
       </div>
-      <div className="posts-container">
+      <div id="posts-container">
         {posts.map((post) =>    //api에서 가져온 데이터
           <Post
-            key={post.apartmentName._id}  // React에서 리스트 항목을 고유하게 식별하기 위해 사용 --> 게시글의 댓글, 공감이 독립적으로 관리되도록한다.
-            id={post.apartmentName._id} // 컴포넌트에 post의 ID 값을 전달하여 게시물을 식별하고 관련 데이터를 처리
+            sortURL={sortURL}
+            key={post._id}  // React에서 리스트 항목을 고유하게 식별하기 위해 사용 --> 게시글의 댓글, 공감이 독립적으로 관리되도록한다.
+            id={post._id} // 컴포넌트에 post의 ID 값을 전달하여 게시물을 식별하고 관련 데이터를 처리
             nickname={post.nickname} //닉네임을 전달
             aptname={post.apartmentName.apartmentName} //이피트 이름을 전달
             isLiked={post.isLiked} //공감이 눌렸지 안 눌렸는지 전달

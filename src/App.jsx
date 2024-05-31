@@ -10,12 +10,12 @@ function App() {
 
   const selectLatest = () => {
     setIsSelectedLatest(true);            //최신순이 눌리면  최신순이true
-    setSortURL('https://apt-api.blbt.app/v1/apartment?page=0&size=10&order=newest');
+    setSortURL('https://apt-api.blbt.app/v1/apartment?page=0&size=20&order=newest');
   };
 
   const selectRanking = () => {
     setIsSelectedLatest(false);         //랭킹순이 눌리면  최신순이 false
-    setSortURL('https://apt-api.blbt.app/v1/apartment?page=0&size=10&order=popular');
+    setSortURL('https://apt-api.blbt.app/v1/apartment?page=0&size=20&order=popular');
   };
 
   
