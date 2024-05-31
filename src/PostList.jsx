@@ -1,7 +1,7 @@
-
-import Post from './Post'
+import React, { useState } from 'react';
+import Post from './Post';
 import PostForm from './PostForm';
-import { useState,useEffect} from 'react';
+import {useEffect} from 'react';
 import './PostList.css';
 import axios from 'axios';
 /**
@@ -9,8 +9,10 @@ import axios from 'axios';
  */
 
 // 게시글 등록 함수
+
 function PostList({sortURL}) {    //API URL을 app.jsx로부터 받아옴
   const [posts, setPosts] = useState([]); //게시글 리스트 상태 - 초기값을 빈 배열로 
+
 
   // /**
   //  * 등록 폼 설정 함수 아파트 이름, 비번을 받으면,
@@ -54,7 +56,7 @@ function PostList({sortURL}) {    //API URL을 app.jsx로부터 받아옴
       } catch (error) {
         console.error(error);
       }
-    };
+
 
     fetchData();
   }, [posts]);    //posts를 관찰!
@@ -67,6 +69,7 @@ function PostList({sortURL}) {    //API URL을 app.jsx로부터 받아옴
         <PostForm  />
         {/* // PostForm 컴포넌트에 registerPost 함수 전달 */}
       </div>
+
       <div id="posts-container">
         {posts.map((post) =>    //api에서 가져온 데이터
           <Post
@@ -82,8 +85,9 @@ function PostList({sortURL}) {    //API URL을 app.jsx로부터 받아옴
           />
         )}
       </div>
+
     </div>
   );
 }
 
-export default PostList
+export default PostList;

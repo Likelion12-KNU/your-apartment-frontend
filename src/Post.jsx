@@ -1,3 +1,4 @@
+
 import React, { useState, useRef,useEffect } from "react";
 import "./Post.css";
 import chatIcon from "./assets/chat.svg"; // chat.svg 파일을 import
@@ -21,6 +22,7 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
   const inputCommentRef = useRef(null); 
   const [commentText, setCommentText] = useState([]); 
 
+
   useEffect(() => {
     fetch(`https://apt-api.blbt.app/v1/apartment/${id}/like`)
       .then((response) => response.json())
@@ -28,7 +30,9 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
 
         setHeartNum(data.likes);
 
+
         fetch( `${sortURL}`)
+
           .then((response) => response.json())
           .then((data) => {
             setIsHeartClicked(data.data.find((v) => v._id === id).isLiked);
@@ -65,9 +69,11 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
         setHeartNum(heartNum - 1);
         setIsHeartClicked(false);
 
+
       })
 
   };
+
 
   const toggleHeart = () => {
     if (isHeartClicked) {
@@ -99,23 +105,21 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
         <p id="aptname">{aptname}</p>
         <div id="heart_comment">
           <img
-            // 하트 클릭 상태에 따라 다른 아이콘을 표시
             src={isHeartClicked ? fillHeartIcon : heartIcon}
-            // 하트 아이콘을 클릭했을 때 toggleHeart 함수 호출
             onClick={toggleHeart}
             id="heart"
             alt="Heart Icon"
-            className="icon" // 인라인 스타일 대신 className 사용
+            className="icon"
           />
-          {/* 현재 하트 숫자를 표시 */}
           <p id="countHeart">{heartNum}</p>
           <img
             src={chatIcon}
             onClick={toggleCommentSelected}
             id="comment"
             alt="Comment Icon"
-            className="icon" // 인라인 스타일 대신 className 사용
+            className="icon"
           />
+
           {/* 현재 댓글 숫자를 표시 */}
           <p id='countComment'>{commentCount}</p>
         </div>
@@ -131,9 +135,9 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
           </div>
 
         }
+
       </div>
     </div>
-
   );
 }
 
