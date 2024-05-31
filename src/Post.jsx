@@ -21,6 +21,11 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
   const [inputValue, setInputValue] = useState(""); 
   const inputCommentRef = useRef(null); 
   const [commentText, setCommentText] = useState([]); 
+  const [isBinClicked, setIsBinClicked]=useState(false);
+  
+
+  const [passwordInputValue,setPasswordInputValue]=useState("");  //비밀번호 입력 초기값
+  const passwordInputRef = useRef(null); 
 
 
   useEffect(() => {
@@ -95,13 +100,73 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
   };
 
   const onChangeInput = (e) => {
-    setInputValue(e.target.value);
+    setPasswordInputValue(e.target.value);
   };
+
+  const onClickBin=()=>{        // 기존 post에서 쓰레기통 클릭-> 삭제칸, 삭제칸 아니요 클릭->기존 post
+    if(isBinClicked==false){
+      setIsBinClicked(true)
+    }
+    else{
+      setIsBinClicked(false)
+    }
+  }
+
+  const onChangePasswordInput = (e) => {      //비밀번호창 변화 관찰
+    setPasswordInputValue(e.target.value);
+  };
+  const onClickDelete=()=>{         //삭제칸에서 '네'라고 답했을 시 일어나는 이벤트
+    const newInput = passwordInputRef.current.value;
+    setPasswordInputValue(newInput)
+      let data = JSON.stringify({
+        "password": `${passwordInputValue}`
+      });
+      
+      let config = {
+        method: 'delete',
+        maxBodyLength: Infinity,
+        url: `https://apt-api.blbt.app/v1/apartment/${id}`,
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        alert("삭제되었습니다!")
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("비밀번호가 틀렸습니다!")
+      });
+      
+   
+
+
+    passwordInputRef.current.value=""
+    setPasswordInputValue("");
+   
+    
+
+  }
 
   return (
     <div id="post">
-      <div id="post_contents">
+      {isBinClicked?(<div id="delete_div">
+        <h3>삭제하시겠습니까?</h3>
+        <div id="delete_form">
+          <input ref={passwordInputRef} value={passwordInputValue} onChange={onChangePasswordInput} type="password" placeholder="비밀번호를 입력하세요" required></input>
+          <button id="delete_yes" onClick={onClickDelete}>네</button>
+          <button id="delete_no" onClick={onClickBin}>아니요</button>
+        </div>
+        
+      </div>)
+      :(
+        <div id="post_contents">
         <h2 id="nickname">{nickname}</h2>
+        <img id="bin" src="src/assets/rubbish-bin-svgrepo-com.svg" onClick={onClickBin}></img>
         <p id="aptname">{aptname}</p>
         <div id="heart_comment">
           <img
@@ -137,6 +202,8 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
         }
 
       </div>
+      )}
+      
     </div>
   );
 }
