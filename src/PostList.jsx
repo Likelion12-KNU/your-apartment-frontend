@@ -104,7 +104,7 @@ function PostList({sortURL, postURL}) {    //API URL을 app.jsx로부터 받아�
   return (
     <div id='PostList_div'>
       <div id="fixed-form-container">
-        <PostForm registerPost={registerPost} />
+        {/*<PostForm registerPost={registerPost} />*/}
         {/* // PostForm 컴포넌트에 registerPost 함수 전달 */}
       </div>
 
