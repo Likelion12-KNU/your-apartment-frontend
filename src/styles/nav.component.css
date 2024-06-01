@@ -13,19 +13,23 @@ nav > img {
 
 nav > h2 {
   color: white;
+  font-size: 1.5rem;
 }
 
 nav > h3 {
   color: #c4c4c4;
+  font-size: 1.25rem;
   margin: 0;
 }
 
 .developers > h4 {
   margin-top: 64px;
+  font-size: 1rem;
 }
 
 .developers > p {
   margin: 0 0 8px;
+  font-size: 0.85rem;
 }
 
 .developers {
