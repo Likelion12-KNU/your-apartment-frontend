@@ -1,0 +1,33 @@
+nav {
+  width: 210px;
+  height: 100vh;
+  border-right: 1px solid #3e3e3e;
+  padding-top: 16px;
+}
+
+nav > img {
+  color: white;
+  width: 48px;
+  height: 48px;
+}
+
+nav > h2 {
+  color: white;
+}
+
+nav > h3 {
+  color: #c4c4c4;
+  margin: 0;
+}
+
+.developers > h4 {
+  margin-top: 64px;
+}
+
+.developers > p {
+  margin: 0 0 8px;
+}
+
+.developers {
+  color: #c4c4c4;
+}
