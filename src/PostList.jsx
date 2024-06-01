@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Post from './Post';
-import PostForm from './PostForm';
+
 // import {useEffect} from 'react';
 import './PostList.css';
 import axios from 'axios';
@@ -96,7 +96,7 @@ function PostList({sortURL, postURL}) {    //API URL을 app.jsx로부터 받아�
       };
 
       fetchData();
-    }, [sortURL]);    //posts를 관찰! sortURL
+    }, [posts]);    //posts를 관찰! sortURL
 
 
   // 게시물들을 렌더링 하는 하는 부분이다. 

@@ -1,7 +1,19 @@
 #PostList_div{
     width: 100%;
-    height: 100%;
-   
+    height: 80vh;
+   overflow-y: auto;
+   border-right: 1px solid#3e3e3e;
+   border-left: 1px solid#3e3e3e;
+   border-bottom: 1px solid#3e3e3e;
+}
+#PostList_div::-webkit-scrollbar{
+  
+  width: 5px;
+  background-color: black;
+}
+#PostList_div::-webkit-scrollbar-thumb{
+  
+  background-color: rgb(97, 97, 97);
 }
 
 #fixed-form-container {
@@ -11,10 +23,10 @@
     /* z-index: 1000; */
 }
 #post-container{
-  background-color: antiquewhite;
+  
   height: 70%;
   overflow-y: auto;
-  
+  background-color: antiquewhite;
 }
 
   /* .posts-container {
