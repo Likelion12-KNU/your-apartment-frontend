@@ -39,3 +39,6 @@
   background-color: black;
 }
 
+#main_mapper {
+  display: flex;
+}
