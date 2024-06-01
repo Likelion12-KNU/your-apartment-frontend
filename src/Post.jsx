@@ -10,8 +10,8 @@ import axios from "axios";
 /**
  * 좋아요 수 댓글 수를 관리합니다.
  */
-
-function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentCount }) {   //postList 컴포넌트에서 json props를 받아온다.
+//+ 등록 URL
+function Post({ sortURL, id, nickname, aptname, isLiked, likeCount, commentCount }) {   //postList 컴포넌트에서 json props를 받아온다.
   // isHeartClicked 상태 변수와 setIsHeartClicked 함수: 하트 아이콘 클릭 여부를 관리
   const [isHeartClicked, setIsHeartClicked] = useState(isLiked);
   // heart 상태 변수와 setHeart 함수: 하트 숫자를 관리
