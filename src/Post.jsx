@@ -5,36 +5,38 @@ import chatIcon from "./assets/chat.svg"; // chat.svg 파일을 import
 import heartIcon from "./assets/heart.svg"; // heart.svg 파일을 import
 import fillHeartIcon from "./assets/fillHeart.svg"; // fillHeart.svg 파일을 import
 import axios from "axios";
+import './CommentList'
+import CommentList from "./CommentList";
 // import postData from "./JSON/post.json";
 
 /**
  * 좋아요 수 댓글 수를 관리합니다.
  */
-
-function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentCount }) {   //postList 컴포넌트에서 json props를 받아온다.
+//+ 등록 URL
+function Post({ sortURL, id, nickname, aptname, isLiked, likeCount, commentCount }) {   //postList 컴포넌트에서 json props를 받아온다.
   // isHeartClicked 상태 변수와 setIsHeartClicked 함수: 하트 아이콘 클릭 여부를 관리
   const [isHeartClicked, setIsHeartClicked] = useState(isLiked);
   // heart 상태 변수와 setHeart 함수: 하트 숫자를 관리
   const [heartNum, setHeartNum] = useState(likeCount);     //좋아요 수 개수
 //처음 렌더링될 때 해당 게시글의 현재 좋아요 개수를 보여주기 위해 0에서 heart로 변경
   const [commentSelected, setCommentSelected] = useState(false);    //댓글 이모티콘이 선택 됐는지 아닌지
+
   const [inputValue, setInputValue] = useState(""); 
-  const inputCommentRef = useRef(null); 
-  const [commentText, setCommentText] = useState([]); 
+  const inputCommentRef = useRef(null);   //댓글 입력 창 관찰
+
   const [isBinClicked, setIsBinClicked]=useState(false);
   
 
   const [passwordInputValue,setPasswordInputValue]=useState("");  //비밀번호 입력 초기값
   const passwordInputRef = useRef(null); 
-
+ 
 
   useEffect(() => {
     fetch(`https://apt-api.blbt.app/v1/apartment/${id}/like`)
       .then((response) => response.json())
       .then((data) => {
-
+      
         setHeartNum(data.likes);
-
 
         fetch( `${sortURL}`)
 
@@ -92,17 +94,48 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
     setCommentSelected(!commentSelected);
   };
 
-  const onClickCommentAdd = () => {
+
+
+  const onClickCommentAdd = () => {             //댓글 입력 
     const newComment = inputCommentRef.current.value;
-    setCommentText([...commentText, newComment]);
+    setInputValue(newComment);
+    
+    
+    let data = JSON.stringify({
+      "nickname": `익명${commentCount+1}`,
+      "comment": `${newComment}`,
+      "password": "P@ssw0rd"
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: `https://apt-api.blbt.app/v1/apartment/${id}/comments`,
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    
     inputCommentRef.current.value = "";
     setInputValue("");
   };
 
-  const onChangeInput = (e) => {
-    setPasswordInputValue(e.target.value);
+  const onChangeInput = (e) => {    //댓글입력창
+      setInputValue(e.target.value);
   };
 
+
+
+  
   const onClickBin=()=>{        // 기존 post에서 쓰레기통 클릭-> 삭제칸, 삭제칸 아니요 클릭->기존 post
     if(isBinClicked==false){
       setIsBinClicked(true)
@@ -147,10 +180,11 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
 
     passwordInputRef.current.value=""
     setPasswordInputValue("");
-   
-    
-
   }
+
+
+
+
 
   return (
     <div id="post">
@@ -166,7 +200,7 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
       :(
         <div id="post_contents">
         <h2 id="nickname">{nickname}</h2>
-        <img id="bin" src="src/assets/rubbish-bin-svgrepo-com.svg" onClick={onClickBin}></img>
+        <img id="bin" src="assets/del.svg" onClick={onClickBin}></img>
         <p id="aptname">{aptname}</p>
         <div id="heart_comment">
           <img
@@ -192,11 +226,12 @@ function Post({ sortURL,key, id, nickname, aptname, isLiked, likeCount, commentC
           <div id="comment_div">
             <div id='input_comment_div'>
               <input ref={inputCommentRef} value={inputValue} onChange={onChangeInput} type='text' placeholder='댓글을 입력하세요.' id='input_comment'/>
+              
               <button onClick={onClickCommentAdd} >댓글 추가</button>
             </div>
-            <div id='comment_list'>
-              {/* {comment.map((comment, i) => <p key={i} ><b>익명{i + 1} </b>{comment}</p>)} */}
-            </div>
+          
+              <CommentList _id={id}  />
+          
           </div>
 
         }
