@@ -8,7 +8,7 @@ function PostList({ orderBy, page }) {
   const [isPostLoading, setIsPostLoading] = useState(false)
 
   const fetch = async () => {
-    const res = await axios.get(`https://apt-api.blbt.app/v1/apartment?page=${page}&size=10&order=${orderBy}`, {
+    const res = await axios.get(`https://apt-api.blbt.app/v1/apartment?page=${page}&size=9999&order=${orderBy}`, {
       headers: {
         'Content-Type': 'application/json',
       },
