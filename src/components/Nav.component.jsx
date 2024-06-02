@@ -1,10 +1,10 @@
 import "../styles/nav.component.css"
-
+import apartment from "../assets/apartment.svg" 
 export default function NavComponent() {
   return (
-    <>
-      <nav>
-        <img src="../../public/apartment.svg"/>
+    
+      <nav id="navcomponent_div">
+        <img src={apartment}/>
         <h2>너의 아파트는</h2>
         <h3>멋쟁이사자처럼</h3>
         <h3>야무진친구들</h3>
@@ -19,6 +19,6 @@ export default function NavComponent() {
           <p>이지혜</p>
         </div>
       </nav>
-    </>
+
   );
 }

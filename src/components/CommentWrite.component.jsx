@@ -47,11 +47,11 @@ export default function CommentWrite({ _id, onCommentAddedListener }) {
   return (
     <div className="comment-write-wrapper">
       <p>새 댓글 쓰기</p>
-      <Space.Compact style={{ width: "100%" }}>
-        <Input style={{ width: '20%' }} placeholder="닉네임" value={commentForm.nickname} onChange={(e) => setCommentForm({ ...commentForm, nickname: e.target.value })}/>
-        <Input style={{ width: '80%' }} placeholder="댓글을 입력하세요" value={commentForm.comment} onChange={(e) => setCommentForm({ ...commentForm, comment: e.target.value })}/>
+      <Space.Compact style={{width: "100%" ,height:'25px'}}>
+        <Input style={{width: '20%' }} placeholder="닉네임" value={commentForm.nickname} onChange={(e) => setCommentForm({ ...commentForm, nickname: e.target.value })}/>
+        <Input style={{width: '80%' }} placeholder="댓글을 입력하세요" value={commentForm.comment} onChange={(e) => setCommentForm({ ...commentForm, comment: e.target.value })}/>
       </Space.Compact>
-      <Button type="default" id="add-comment" onClick={onAddCommentClickListener}>등록</Button>
+      <Button  type="default" id="add-comment" onClick={onAddCommentClickListener}>등록</Button>
     </div>
   )
 }

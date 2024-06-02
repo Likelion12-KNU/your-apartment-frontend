@@ -13,7 +13,7 @@ export default function HomeComponent() {
   }
 
   return (
-    <section>
+    <section id="section_div">
       <Header sorting={orderBy} onOrderChangedListener={onOrderChangedListener} />
       <ApartmentForm />
       <PostList orderBy={orderBy} page={page} />
