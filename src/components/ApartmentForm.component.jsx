@@ -2,11 +2,12 @@ import "../styles/apartment-form.component.css"
 import {useState} from "react";
 import DataListComponent from "./DataList.component.jsx";
 import axios from "axios";
+import {generateUserName} from "../utils.js";
 
 export default function ApartmentForm() {
   const [searchedApartments, setSearchedApartments] = useState([]);
   const [createApartmentForm, setCreateApartmentForm] = useState({
-    nickname: "",
+    nickname: generateUserName(),
     apartmentName: "",
     password: "",
   })

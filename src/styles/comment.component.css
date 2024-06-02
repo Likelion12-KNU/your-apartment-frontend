@@ -1,0 +1,24 @@
+.comment-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 24px 0 32px;
+  cursor: pointer;
+  border-bottom: 1px solid #3e3e3e;
+}
+
+.comment-header {
+  display: flex;
+}
+
+.comment-header p {
+  margin-bottom: 2px;
+}
+
+.comment-header p:nth-child(1) {
+  color: white;
+  font-weight: bold;
+}
+
+.comment-wrapper #content {
+  color: white;
+}

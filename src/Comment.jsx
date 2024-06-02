@@ -35,7 +35,7 @@ function Comment({key, id, nickname, comment}) {
     <div id="comment_content_div">
         <p id="comment_name">{nickname}</p>
         <p id="comment_content">{comment}</p>
-        <img id="comment_bin" src="src/assets/rubbish-bin-svgrepo-com.svg" onClick={onClickBin}></img>
+        <img id="comment_bin" src="assets/del.svg" onClick={onClickBin}></img>
     </div>
   );
 }

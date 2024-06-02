@@ -200,7 +200,7 @@ function Post({ sortURL, id, nickname, aptname, isLiked, likeCount, commentCount
       :(
         <div id="post_contents">
         <h2 id="nickname">{nickname}</h2>
-        <img id="bin" src="src/assets/rubbish-bin-svgrepo-com.svg" onClick={onClickBin}></img>
+        <img id="bin" src="assets/del.svg" onClick={onClickBin}></img>
         <p id="aptname">{aptname}</p>
         <div id="heart_comment">
           <img
