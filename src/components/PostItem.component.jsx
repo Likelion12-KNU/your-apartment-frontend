@@ -27,17 +27,20 @@ import CommentWrite from "./CommentWrite.component.jsx";
     }
 
     const onPostClickedListener = async () => {
-      if (comments.length === 0) {
+      if(!isCommentClicked){        //댓글창을 여는 경우
         setIsCommentClicked(true)
         const response = await axios.get(`https://apt-api.blbt.app/v1/apartment/${_id}/comments`)
         if (response.status === HttpStatusCode.Ok) {
           setComments(response.data.comments)
         }
-      } else {
-        // 다시 눌러 닫은 경우
+      }
+      else{
         setComments([])
         setIsCommentClicked(false)
       }
+      
+   
+      
     }
 
     const onCommentAddedListener = async () => {
@@ -82,31 +85,32 @@ import CommentWrite from "./CommentWrite.component.jsx";
         </div>
         <p id="apartment-name" onClick={onPostClickedListener}>&quot;{apartmentName}&quot;</p>
         <p id="gpt-score">평가: <span>{gptScore}점</span></p>
-        <div className="like-comment-wrapper">
+        <div className="like-comment-delete-wrapper">
           {
             newIsLiked ? (
-              <div className="icon-text-wrapper" onClick={onLikeClickListener}>
-                <img src={fillHeart} alt="좋아요 취소"/>
+              <div id="like-icon-wrapper" className="icon-text-wrapper" >
+                <img src={fillHeart} alt="좋아요 취소" onClick={onLikeClickListener}/>
                 <p>{newLikeCount}</p>
               </div>
             ) : (
-              <div className="icon-text-wrapper" onClick={onLikeClickListener}>
-                <img src={heart} alt="좋아요 표시"/>
+              <div id="like-icon-wrapper" className="icon-text-wrapper" onClick={onLikeClickListener}>
+                <img src={heart} alt="좋아요 표시" onClick={onLikeClickListener}/>
                 <p>{newLikeCount}</p>
               </div>
             )
           }
-          <div className="icon-text-wrapper" onClick={onPostClickedListener}>
-            <img src={chat} alt="댓글"/>
+          <div id="text-icon-wrapper" className="icon-text-wrapper" >
+            <img src={chat} alt="댓글" onClick={onPostClickedListener}/>
             <p>{commentCount}</p>
           </div>
-          <div style={{flex: 2}}/>
-          <div className="icon-text-wrapper" onClick={showDeleteModal}>
+          {/* <div style={{marginRight:'100px',flex: 2}}/> */}
+          <div id="delete-icon-wrapper" className="icon-text-wrapper" onClick={showDeleteModal}>
             <img src={del} alt="삭제"/>
             <p>삭제</p>
           </div>
         </div>
         <div className="post-comments">
+          <div className="post-comments-list">
           {
             comments.map((comment) => <Comment
               key={comment._id}
@@ -114,6 +118,8 @@ import CommentWrite from "./CommentWrite.component.jsx";
               comment={comment.comment}
               createdAt={comment.createdAt} />)
           }
+          </div>
+          
           {
             isCommentClicked ?  <CommentWrite _id={_id} onCommentAddedListener={onCommentAddedListener} /> : <></>
           }
