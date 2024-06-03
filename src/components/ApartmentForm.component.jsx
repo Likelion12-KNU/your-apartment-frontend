@@ -12,6 +12,7 @@ export default function ApartmentForm() {
     password: "",
   })
   const [selectedApartment, setSelectedApartment] = useState()
+  const [submitClicked, setSubmitClicked] = useState(false)
 
   const onApartmentNameChanged = async (e) => {
     setSelectedApartment(null)
@@ -31,13 +32,16 @@ export default function ApartmentForm() {
   }
 
   const onSubmit = async () => {
+    setSubmitClicked(true)
     if (createApartmentForm.nickname == "" || createApartmentForm.password == "") {
       alert("닉네임 또는 비밀번호가 비어있습니다.");
+      setSubmitClicked(false)
       return;
     }
 
     if (!selectedApartment) {
       alert("아파트를 리스트에서 선택해주세요!");
+      setSubmitClicked(false)
       return;
     }
 
@@ -55,6 +59,7 @@ export default function ApartmentForm() {
         alert("등록에 실패했습니다. :(")
       }
     }
+    setSubmitClicked(false)
   }
 
   return (
@@ -85,7 +90,7 @@ export default function ApartmentForm() {
                  ...createApartmentForm, password: e.target.value })}/>
       </div>
       <br />
-      <button type="button" className="btn btn-primary submit" onClick={onSubmit}>등록하기</button>
+      <button type="button" className="btn btn-primary submit" onClick={onSubmit} disabled={submitClicked}>등록하기</button>
     </div>
   );
 }
